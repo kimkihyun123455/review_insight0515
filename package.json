@@ -4,6 +4,7 @@
   "description": "AI Sentiment Analyzer using OpenAI and Supabase",
   "main": "index.js",
   "scripts": {
+    "build": "echo 'No build step required'",
     "start": "node server.js",
     "dev": "node server.js"
   },
