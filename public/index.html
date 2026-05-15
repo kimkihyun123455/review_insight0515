@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Sentiment Analyzer - 스타벅스풍 감성 분석 서비스</title>
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+  <!-- 1. Header -->
+  <header class="header">
+    <nav class="nav-container">
+      <h1 class="logo">AI 감성 분석 서비스</h1>
+      <ul class="nav-menu">
+        <li><a href="#">서비스 소개</a></li>
+        <li><a href="#">사용 방법</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- 2. Hero Section -->
+    <section class="hero">
+      <div class="container hero-content">
+        <h2 class="hero-title">AI 감성 분석 서비스</h2>
+        <p class="hero-description">
+          텍스트를 입력하면 AI가 문장의 감성을 긍정, 부정, 중립으로 분석합니다.
+        </p>
+
+        <!-- 3. Input Card -->
+        <div class="card input-card">
+          <textarea id="sentimentText" maxlength="1000"
+            placeholder="분석하고 싶은 문장을 입력하세요. 예: 오늘 서비스가 정말 만족스러웠어요."></textarea>
+          <div class="input-footer">
+            <span id="charCount" class="char-count">0 / 1,000</span>
+            <p id="errorMessage" class="error-message"></p>
+            <button id="analyzeButton" class="button-primary">감성분석</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Info Cards Section -->
+    <section class="info-section">
+      <div class="container info-grid">
+        <div class="card info-card">
+          <div class="info-icon positive">😊</div>
+          <h3>긍정 분석</h3>
+          <p>만족, 기대, 칭찬, 호의적인 표현을 감지합니다.</p>
+        </div>
+        <div class="card info-card">
+          <div class="info-icon negative">😞</div>
+          <h3>부정 분석</h3>
+          <p>불만, 실망, 분노, 비판적인 표현을 감지합니다.</p>
+        </div>
+        <div class="card info-card">
+          <div class="info-icon neutral">😐</div>
+          <h3>중립 분석</h3>
+          <p>감정 표현이 약하거나 정보 전달 중심의 문장을 분류합니다.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 5. Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2026 AI Sentiment Analyzer. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- 6. Result Modal -->
+  <div id="resultModalBackdrop" class="modal-backdrop">
+    <div id="resultModal" class="modal">
+      <button id="modalCloseButton" class="modal-close-x">&times;</button>
+      <h2 class="modal-title">분석 결과</h2>
+
+      <div class="result-content">
+        <div id="resultLabel" class="result-label">긍정</div>
+        <div id="resultConfidence" class="result-confidence">신뢰도 92%</div>
+
+        <hr class="divider">
+
+        <p id="resultReason" class="result-reason">
+          문장에 긍정적인 표현이 포함되어 있습니다. 전반적인 어조가 호의적이며 불만 표현이 없습니다.
+        </p>
+      </div>
+
+      <div class="modal-footer">
+        <button id="modalConfirmButton" class="button-primary">확인</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+
+</html>

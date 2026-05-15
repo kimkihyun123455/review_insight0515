@@ -1,0 +1,374 @@
+/* 01. CSS 변수 및 디자인 토큰 정의 (01_DESIGN_SYSTEM.md 참조) */
+:root {
+  /* 색상 토큰 - 스타벅스풍 테마 */
+  --color-starbucks-green: #006241;
+  --color-green-accent: #00754A;
+  --color-house-green: #1E3932;
+  --color-green-light: #d4e9e2;
+
+  --color-warm-bg: #f2f0eb;
+  --color-ceramic-bg: #edebe9;
+  --color-white: #ffffff;
+
+  --color-text-main: rgba(0, 0, 0, 0.87);
+  --color-text-sub: rgba(0, 0, 0, 0.58);
+  --color-text-white: #ffffff;
+  --color-text-white-soft: rgba(255, 255, 255, 0.70);
+
+  --color-error: #c82014;
+  --color-gold: #cba258;
+
+  /* 감성별 전용 색상 */
+  --sentiment-positive: #00754A;
+  --sentiment-negative: #c82014;
+  --sentiment-neutral: rgba(0, 0, 0, 0.58);
+
+  /* 타이포그래피 */
+  --font-main: 'Inter', 'Manrope', "Helvetica Neue", Arial, sans-serif;
+  --text-h1: 32px;
+  --text-h2: 24px;
+  --text-body: 16px;
+  --text-small: 14px;
+  --line-normal: 1.5;
+  --line-compact: 1.2;
+  --letter-tight: -0.01em;
+
+  /* 간격(Spacing) */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 16px;
+  --space-4: 24px;
+  --space-5: 32px;
+  --space-6: 40px;
+  --space-7: 48px;
+  --space-8: 56px;
+  --space-9: 64px;
+
+  /* 보더 라운드 */
+  --radius-card: 12px;
+  --radius-button: 50px;
+  --radius-circle: 50%;
+
+  /* 그림자(Shadow) */
+  --shadow-card: 0 0 0.5px rgba(0,0,0,0.14), 0 1px 1px rgba(0,0,0,0.24);
+  --shadow-nav: 0 1px 3px rgba(0,0,0,0.1), 0 2px 2px rgba(0,0,0,0.06), 0 0 2px rgba(0,0,0,0.07);
+  --shadow-modal: 0 0 6px rgba(0,0,0,0.24), 0 8px 12px rgba(0,0,0,0.14);
+}
+
+/* 기본 리셋 및 베이스 스타일 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-main);
+  background-color: var(--color-warm-bg);
+  color: var(--color-text-main);
+  line-height: var(--line-normal);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 공통 컴포넌트 스타일 */
+
+/* 1. 버튼 (Pill형) */
+.button-primary {
+  background: var(--color-green-accent);
+  color: var(--color-white);
+  border: 1px solid var(--color-green-accent);
+  border-radius: var(--radius-button);
+  padding: 12px 24px;
+  font-size: var(--text-body);
+  font-weight: 600;
+  letter-spacing: var(--letter-tight);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 120px;
+}
+
+.button-primary:hover {
+  background: var(--color-starbucks-green);
+  border-color: var(--color-starbucks-green);
+}
+
+.button-primary:active {
+  transform: scale(0.95);
+}
+
+.button-primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  filter: grayscale(0.5);
+}
+
+/* 2. 카드 스타일 */
+.card {
+  background: var(--color-white);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  padding: var(--space-6);
+  transition: transform 0.2s ease;
+}
+
+/* 3. 모달 레이아웃 */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.48);
+  display: none; /* 기본 숨김 */
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(2px);
+}
+
+.modal-backdrop.active {
+  display: flex;
+}
+
+.modal {
+  background: var(--color-white);
+  border-radius: var(--radius-card);
+  padding: var(--space-6);
+  box-shadow: var(--shadow-modal);
+  width: 90%;
+  max-width: 500px;
+  position: relative;
+  animation: modal-slide-up 0.3s ease-out;
+  text-align: center;
+}
+
+@keyframes modal-slide-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.modal-close-x {
+  position: absolute;
+  top: var(--space-3);
+  right: var(--space-3);
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: var(--color-text-sub);
+  cursor: pointer;
+}
+
+.modal-title {
+  font-size: var(--text-h2);
+  color: var(--color-starbucks-green);
+  margin-bottom: var(--space-4);
+}
+
+/* 결과 모달 내부 스타일 */
+.result-label {
+  font-size: 40px;
+  font-weight: 700;
+  margin-bottom: var(--space-1);
+}
+
+.result-confidence {
+  font-size: var(--text-body);
+  color: var(--color-text-sub);
+  margin-bottom: var(--space-4);
+}
+
+.divider {
+  border: none;
+  border-top: 1px solid var(--color-ceramic-bg);
+  margin: var(--space-4) 0;
+}
+
+.result-reason {
+  text-align: left;
+  font-size: var(--text-body);
+  color: var(--color-text-main);
+  background: var(--color-warm-bg);
+  padding: var(--space-4);
+  border-radius: var(--radius-card);
+  margin-bottom: var(--space-5);
+}
+
+/* 레이아웃 시스템 */
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 var(--space-4);
+}
+
+/* 1. Header 스타일 */
+.header {
+  background: var(--color-white);
+  box-shadow: var(--shadow-nav);
+  height: 72px;
+  display: flex;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.nav-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--space-6);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--color-starbucks-green);
+}
+
+.nav-menu {
+  list-style: none;
+  display: flex;
+  gap: var(--space-5);
+}
+
+.nav-menu a {
+  text-decoration: none;
+  color: var(--color-text-main);
+  font-weight: 600;
+  font-size: var(--text-small);
+  transition: color 0.2s;
+}
+
+.nav-menu a:hover {
+  color: var(--color-green-accent);
+}
+
+/* 2. Hero Section 스타일 */
+.hero {
+  padding: var(--space-9) 0;
+  text-align: center;
+}
+
+.hero-title {
+  font-size: var(--text-h1);
+  color: var(--color-starbucks-green);
+  margin-bottom: var(--space-3);
+}
+
+.hero-description {
+  color: var(--color-text-sub);
+  margin-bottom: var(--space-7);
+}
+
+/* 3. Input Card 스타일 */
+.input-card {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+#sentimentText {
+  width: 100%;
+  min-height: 180px;
+  border: 1px solid var(--color-ceramic-bg);
+  border-radius: var(--radius-card);
+  padding: var(--space-4);
+  font-family: inherit;
+  font-size: var(--text-body);
+  resize: vertical;
+  margin-bottom: var(--space-3);
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+#sentimentText:focus {
+  border-color: var(--color-green-accent);
+}
+
+.input-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.char-count {
+  font-size: var(--text-small);
+  color: var(--color-text-sub);
+}
+
+.error-message {
+  font-size: var(--text-small);
+  color: var(--color-error);
+  flex-grow: 1;
+  text-align: left;
+  margin: 0 var(--space-4);
+}
+
+/* 4. Info Section 스타일 */
+.info-section {
+  padding: var(--space-9) 0;
+  background: var(--color-ceramic-bg);
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-5);
+}
+
+.info-card {
+  text-align: center;
+  padding: var(--space-6);
+}
+
+.info-icon {
+  font-size: 32px;
+  margin-bottom: var(--space-3);
+}
+
+.info-card h3 {
+  font-size: 18px;
+  margin-bottom: var(--space-2);
+  color: var(--color-house-green);
+}
+
+.info-card p {
+  font-size: var(--text-small);
+  color: var(--color-text-sub);
+}
+
+/* 5. Footer 스타일 */
+.footer {
+  padding: var(--space-6) 0;
+  text-align: center;
+  font-size: var(--text-small);
+  color: var(--color-text-sub);
+}
+
+/* 반응형 미디어 쿼리 (02_UI_IMPLEMENTATION.md 참조) */
+@media (max-width: 768px) {
+  .info-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .hero-title {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 480px) {
+  .input-footer {
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+  
+  #analyzeButton {
+    width: 100%;
+  }
+  
+  .nav-menu {
+    display: none; /* 모바일에서 메뉴 숨김 */
+  }
+}
